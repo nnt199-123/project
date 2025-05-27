@@ -2,11 +2,13 @@ const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
-    name:{
+    firstname:{
         type:String,
         required:true,
-        unique:true,
-        index:true,
+    },
+    lastname : {
+        type:String,
+        require: true,
     },
     email:{
         type:String,
@@ -22,6 +24,36 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    role:{
+         type:String,
+         default:'user',
+    },
+    cart:{
+        type:Array,
+        default:[],
+    },
+      address: [{ type: mongoose.Types.ObjectId, ref: 'Address' }],
+    wishlist: [{ type: mongoose.Types.ObjectId, ref: 'Product' }],
+    isBlocked: {
+        type: Boolean,
+        default: false
+    },
+    refreshToken: {
+        type: String,
+    },
+    passwordChangedAt: {
+        type: String
+    },
+    passwordResetToken: {
+        type: String
+    },
+    
+  passwordResetExpires: {
+        type: String
+    }
+},
+ {
+    timestamps: true
 });
 
 //Export the model
